@@ -7,7 +7,7 @@ argo-cd:
   server:
     ingress:
       # -- Enable an ingress resource for the Argo CD server
-      enabled: false
+      enabled: true
       # -- Additional ingress annotations
       annotations:
         kubernetes.io/tls-acme: "true"
@@ -23,17 +23,17 @@ argo-cd:
 
       tls:
         - hosts:
-          - argocd.somedomain.com
-          secretName: argocd-somedomain-com
+          - argocd.henrywhitaker.com
+          secretName: argocd-henrywhitaker-com
 
       # -- List of ingress hosts
       ## Argo Ingress.
       ## Hostnames must be provided if Ingress is enabled.
       ## Secrets must be manually created in the namespace
       hosts:
-        - argocd.somedomain.com
+        - argocd.henrywhitaker.com
     config:
-      url: https://argo.somedomain.com
+      url: https://argo.henrywhitaker.com
       repositories: |
         - type: helm
           name: stable
