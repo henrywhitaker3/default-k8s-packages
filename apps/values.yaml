@@ -9,7 +9,7 @@ applications:
     - name: argocd
       namespace: argocd
       project: cluster
-      path: charts/argo-cd
+      path: argo-cd
       repoUrl: https://github.com/henrywhitaker3/default-k8s-packages
       targetRevision: HEAD
       syncPolicy:
