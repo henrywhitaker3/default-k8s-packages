@@ -1,0 +1,48 @@
+projects:
+  - name: cluster
+    description: Things that make the cluster work
+  - name: apps
+    description: Our apps running in the cluster
+
+applications:
+  git:
+    - name: argocd
+      namespace: argocd
+      project: cluster
+      path: charts/argo-cd
+      repoUrl: https://github.com/henrywhitaker3/default-k8s-packages
+      targetRevision: HEAD
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+  charts:
+    - name: cert-manager
+      project: cluster
+      namespace: cert-manager
+      chart: cert-manager
+      repoUrl: https://charts.jetstack.io
+      targetRevision: 1.5.4
+      values:
+        ingressShim:
+          defaultIssuerGroup: cert-manager.io
+          defaultIssuerKind: ClusterIssuer
+          defaultIssuerName: letsencrypt-production
+        installCRDs: true
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+    - name: ingress-nginx
+      project: cluster
+      namespace: ingress
+      chart: ingress-nginx
+      repoUrl: https://kubernetes.github.io/ingress-nginx
+      targetRevision: 4.0.18
+      values: {}
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

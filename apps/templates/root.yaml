@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  project: cluster
+  source:
+    path: apps/
+    repoURL: git@gitlab.com/voodoosms/deployments/argo.git
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+      - values.{{ .Values.environment }}.yaml
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
