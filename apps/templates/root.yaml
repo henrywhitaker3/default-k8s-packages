@@ -11,11 +11,11 @@ spec:
   project: cluster
   source:
     path: apps/
-    repoURL: git@gitlab.com/voodoosms/deployments/argo.git
+    repoURL: https://github.com/henrywhitaker3/default-k8s-packages
     targetRevision: HEAD
     helm:
       valueFiles:
-      - values.{{ .Values.environment }}.yaml
+      - values.yaml
   syncPolicy:
     automated:
       prune: true
